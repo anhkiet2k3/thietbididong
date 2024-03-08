@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<section class="content">
+		<div class="container-fluid">
+			<div class="p-5"
+				style="box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px; border-radius: 20px; background-color: #ffff;">
+				<!-- <div class="d-flex mb-4">
+					<form class="d-flex" action="/admin/view-all-order-keyword"
+						method="get">
+						<input style="width: 300px;" class="form-control me-2"
+							name="keyword" type="number"
+							placeholder="Tìm kiếm theo mã đơn hàng" aria-label="Search">
+						<button class="btn btn-outline-success ml-3" type="submit">Tìm
+							kiếm</button>
+					</form>
+					<form class="d-flex" action="/admin/view-all-order" method="get">
+						<input name="p" type="hidden"> <input name="status"
+							value="${status}" type="hidden"> <input
+							style="width: 150px;" type="date" value="${mindate}"
+							class="form-control ml-4" id="date" name="datemin"> <input
+							style="width: 150px;" type="date" value="${maxdate}"
+							class="form-control ml-2" id="date" name="datemax">
+						<button class="btn btn-outline-success ml-3" type="submit">Lọc</button>
+					</form>
+					<form class="d-flex ms-auto" id="myForm"
+						action="/admin/view-all-order" method="get">
+						<input name="p" type="hidden"> <input
+							style="width: 150px;" type=hidden value="${mindate}"
+							class="form-control ml-4" name="datemin"> <input
+							style="width: 150px;" type="hidden" value="${maxdate}"
+							class="form-control ml-2" name="datemax"> <select
+							name="status"
+							onchange="document.getElementById('myForm').submit();"
+							style="width: 200px;" class="form-select ms-auto"
+							aria-label="Default select example">
+							<option value="">Tất cả đơn hàng</option>
+							<option ${status== "X"? "selected" : ""} value="X">Đang
+								xử lí</option>
+							<option ${status== "N"? "selected" : ""} value="N">Đã
+								nhận</option>
+							<option ${status== "H"? "selected" : ""} value="H">Đã
+								hủy</option>
+						</select>
+					</form>
+				</div> -->
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">MÃ ĐƠN HÀNG</th>
+							<th scope="col">TÊN KHÁCH HÀNG</th>
+							<th scope="col">THỜI GIAN MUA</th>
+							<th scope="col">TỔNG TIỀN</th>
+							<th scope="col">TRẠNG THÁI</th>
+							<th scope="col">THANH TOÁN</th>
+							<th scope="col">CHI TIẾT</th>
+						</tr>
+					</thead>
+					<tbody>
+							<tr ng-repeat="order in order">
+								<th scope="row">{{order.idOrder}}</th>
+								<td>{{order.username}}</td>
+								<td>{{order.date}}</td>
+								<td>{{order.total}}</td>
+								<td>
+								    <span ng-if="order.status === 'X'"><span style="color: blue; font-style: italic; font-weight: bold;">Chờ xác nhận</span></span>
+								    <span ng-if="order.status === 'N'"><span style="color: green; font-style: italic; font-weight: bold;">Đang chuẩn bị</span></span>
+								    <span ng-if="order.status === 'H'"><span style="color: red; font-style: italic; font-weight: bold;">Đã hủy</span></span>
+								</td>
+								<td>
+								    <span ng-if="order.payment === 1"><span style=" font-style: italic; font-weight: bold;">Thanh toán khi nhận hàng</span></span>
+								    <span ng-if="order.payment === 2"><span style=" font-style: italic; font-weight: bold;">Thanh toán qua ngân hàng</span></span>
+								</td>
+								<td><a class="btn btn-primary"
+									href="#!order-detail/{{order.idOrder}}">Chi
+										tiết</a></td>
+							</tr>
+					</tbody>
+				</table>
+				<div class="container">
+					<nav aria-label="Page navigation">
+						<ul class="pagination" id="pagination"></ul>
+					</nav>
+					<form id="sumitForm" action="/admin/view-all-order" method="get">
+						<input id="page" name="p" type="hidden"> <input
+							name="status" value="${status}" type="hidden"> <input
+							style="width: 150px;" type=hidden value="${mindate}"
+							class="form-control ml-4" name="datemin"> <input
+							style="width: 150px;" type="hidden" value="${maxdate}"
+							class="form-control ml-2" name="datemax">
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</section>
+</body>
+</html>
